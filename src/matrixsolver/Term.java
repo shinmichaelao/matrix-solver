@@ -20,9 +20,11 @@ public class Term {
     public Term(String term){
         int coeffEndsAt = 0;
         char curChar = term.charAt(coeffEndsAt);
-        while(Character.isDigit(curChar) || !Character.isLetterOrDigit(curChar)){ //check if its either a number or  a . or sign
+        while(!Character.isLetter(term.charAt(coeffEndsAt))){ //check if its either a number or  a . or sign
             coeffEndsAt++;
         }
+        coeffEndsAt--;
+        String coeffString = term.substring(0,coeffEndsAt + 1);
         this.coeff = Double.parseDouble(term.substring(0,coeffEndsAt + 1));
         this.variable = term.substring(coeffEndsAt, term.length());
     }
