@@ -18,13 +18,13 @@ public class Term {
     }
     
     public Term(String term){
-        
-        String variableStr;
         int coeffEndsAt = 0;
         char curChar = term.charAt(coeffEndsAt);
         while(Character.isDigit(curChar) || !Character.isLetterOrDigit(curChar)){ //check if its either a number or  a . or sign
             coeffEndsAt++;
         }
         this.coeff = Double.parseDouble(term.substring(0,coeffEndsAt + 1));
+        this.variable = term.substring(coeffEndsAt, term.length());
     }
+    
 }
