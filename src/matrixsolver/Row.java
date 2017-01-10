@@ -4,10 +4,13 @@
  */
 package matrixsolver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author xum3131
  */
 public class Row {
-    
+    List<Term> terms = new ArrayList();;
 }

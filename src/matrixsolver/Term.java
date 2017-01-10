@@ -19,14 +19,32 @@ public class Term {
     
     public Term(String term){
         int coeffEndsAt = 0;
-        char curChar = term.charAt(coeffEndsAt);
+        int termLength = term.length();
         while(!Character.isLetter(term.charAt(coeffEndsAt))){ //check if its either a number or  a . or sign
             coeffEndsAt++;
+            if(coeffEndsAt == termLength){
+                break;
+            }
         }
         coeffEndsAt--;
         String coeffString = term.substring(0,coeffEndsAt + 1);
-        this.coeff = Double.parseDouble(term.substring(0,coeffEndsAt + 1));
-        this.variable = term.substring(coeffEndsAt, term.length());
+        switch (coeffString) {
+            case "":
+                coeffString = "1";
+                break;
+            case "+":
+                coeffString = "1";
+                break;
+            case "-":
+                coeffString = "-1";
+                break;
+        }
+        String termString = term.substring(coeffEndsAt+1, termLength);
+        if(termString.equals("")){
+            termString = "constant";
+        }
+        this.coeff = Double.parseDouble(coeffString);
+        this.variable = termString;
     }
     
 }
