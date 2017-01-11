@@ -9,9 +9,10 @@ TODO List
 
 A: Linear matrix solving
 
-1. Create classes for matrices and linear equations
+1. Create classes for matrices(WORKING ON) and linear equations(DONE) 
 
 2. Add pivoting to sort matrix into row-echelon form
+
   a. Require addition of fraction class and corresponding operators to work with pivots that result in 1/3 and 5/7
 
 3. Perform gaussian elimination on matrix
