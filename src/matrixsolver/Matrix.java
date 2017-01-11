@@ -4,10 +4,10 @@
  */
 package matrixsolver;
 
-/**
- *
- * @author xum3131
- */
+import java.util.*;
+
 public class Matrix {
+    List<Row> rows = new ArrayList();
+    
     
 }

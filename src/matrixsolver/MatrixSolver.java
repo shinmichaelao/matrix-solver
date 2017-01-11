@@ -14,8 +14,7 @@ public class MatrixSolver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Term kappa = new Term("+3.5");
-        System.out.println(kappa.coeff);
-        System.out.println(kappa.variable);
+        Row kappa = new Row("6x - 3y + 1 = x");
+        System.out.println(kappa.parts);
     }
 }
