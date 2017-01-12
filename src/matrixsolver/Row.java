@@ -62,5 +62,8 @@ public class Row {
         }
         
     }
-
+    
+    public void multiplyScalar(){
+        
+    }
 }
