@@ -11,12 +11,12 @@ import java.util.*;
  * @author xum3131
  */
 public class Row {
-    Map<String, Double> parts = new HashMap<>();
+    Map<String, Fraction> parts = new HashMap<>();
     int fixing = 1;
     
 
     public Row(String equation){
-        parts.put("constant", 0.0);
+        parts.put("constant", new Fraction(0,1));
         
         equation = equation.replaceAll("\\s+","");
         char[] kappa = equation.toCharArray();
@@ -46,21 +46,28 @@ public class Row {
     public void addTerm(Term newTerm){
                 
         String key = newTerm.variable;
-        double value;
+        Fraction value;
         if(key.equals("constant")){
-            value = newTerm.coeff * fixing * -1;
+            //value = newTerm.coeff * fixing * -1;
+            newTerm.coeff.multiplyScalar(fixing * -1);
+            value = newTerm.coeff;
         }
         else{
-            value = newTerm.coeff * fixing;
+            //value = newTerm.coeff * fixing;
+            newTerm.coeff.multiplyScalar(fixing);
+            value = newTerm.coeff;
         }
 
         if(!this.parts.containsKey(key)){
             this.parts.put(key, value);
         }
         else{
-            this.parts.put(key, this.parts.get(key) + value);
+            this.parts.put(key, Fraction.add(this.parts.get(key), value));
         }
         
     }
-
+    
+    public void multiplyScalar(){
+        
+    }
 }
