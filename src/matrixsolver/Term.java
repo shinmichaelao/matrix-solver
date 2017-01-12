@@ -9,11 +9,11 @@ package matrixsolver;
  * @author xum3131
  */
 public class Term {
-    double coeff;
+    Fraction coeff;
     String variable;
     
     public Term(double c, String v){
-        this.coeff = c;
+        this.coeff = new Fraction(c);
         this.variable = v;
     }
     
@@ -43,8 +43,11 @@ public class Term {
         if(termString.equals("")){
             termString = "constant";
         }
-        this.coeff = Double.parseDouble(coeffString);
+        this.coeff = new Fraction(coeffString);
         this.variable = termString;
     }
     
+    public String toString(){
+        return coeff.toString() + variable;
+    }
 }
