@@ -38,8 +38,10 @@ public class Row {
             else{
                 curPart += Character.toString(curChar);
             }
+            
         }
         this.addTerm(new Term(curPart));
+
         fixing = 1;
     }
     
