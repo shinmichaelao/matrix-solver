@@ -10,7 +10,7 @@ TODO List
 
 A: Linear matrix solving
 
-1. Create classes for matrices(WORKING ON) and linear equations(DONE) 
+1. Create classes for matrices(DONE) and linear equations(DONE) 
 
 2. Add pivoting to sort matrix into row-echelon form
 
