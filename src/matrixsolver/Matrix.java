@@ -9,5 +9,9 @@ import java.util.*;
 public class Matrix {
     List<Row> rows = new ArrayList();
     
+    public Matrix(List<Row> stuff){
+        this.rows = stuff;
+    }
+    
     
 }

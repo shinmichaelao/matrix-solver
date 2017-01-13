@@ -52,8 +52,13 @@ public class Fraction {
     //reduce fraction to lowest terms
     public void reduce() {
         int gcd = getGCD( numerator, denominator );
-        numerator /= gcd;
-        denominator /= gcd;       
+        this.numerator /= gcd;
+        this.denominator /= gcd;
+        
+        if(denominator < 0){
+            this.numerator = numerator *-1;
+            this.denominator = denominator *-1;
+        }
     }
     
     public void multiplyScalar( int n){
@@ -103,6 +108,10 @@ public class Fraction {
     @Override
     public String toString(){
         String printedFrac;
+        if(this.numerator == 0){
+            return "0";
+        }
+        
         if(this.denominator == 1){
             printedFrac = "" + this.numerator;
         }

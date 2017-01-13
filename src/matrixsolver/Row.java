@@ -50,12 +50,10 @@ public class Row {
         String key = newTerm.variable;
         Fraction value;
         if(key.equals("constant")){
-            //value = newTerm.coeff * fixing * -1;
             newTerm.coeff.multiplyScalar(fixing * -1);
             value = newTerm.coeff;
         }
         else{
-            //value = newTerm.coeff * fixing;
             newTerm.coeff.multiplyScalar(fixing);
             value = newTerm.coeff;
         }
@@ -69,7 +67,17 @@ public class Row {
         
     }
     
-    public void multiplyScalar(){
-        
+    public void multiplyScalar(Fraction f){
+        List<String> keys = new ArrayList<>(this.parts.keySet());
+        for(String key: keys){
+            this.parts.put(key, Fraction.multiply(this.parts.get(key), f));
+        }
+    }
+    
+    public void divideScalar(Fraction f){
+        List<String> keys = new ArrayList<>(this.parts.keySet());
+        for(String key: keys){
+            this.parts.put(key, Fraction.divide(this.parts.get(key), f));
+        }
     }
 }
