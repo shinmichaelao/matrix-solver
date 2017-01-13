@@ -45,6 +45,10 @@ public class Row {
         fixing = 1;
     }
     
+    public Term getTerm(String s){
+        Fraction f = this.parts.get(s);
+        return new Term(f,s);
+    }
     public void addTerm(Term newTerm){
                 
         String key = newTerm.variable;
@@ -79,5 +83,9 @@ public class Row {
         for(String key: keys){
             this.parts.put(key, Fraction.divide(this.parts.get(key), f));
         }
+    }
+    
+    public String toString(){
+        return this.parts.toString();
     }
 }

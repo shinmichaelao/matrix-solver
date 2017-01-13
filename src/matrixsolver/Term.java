@@ -17,6 +17,11 @@ public class Term {
         this.variable = v;
     }
     
+    public Term(Fraction f, String v){
+        this.coeff = f;
+        this.variable = v;
+    }
+    
     public Term(String term){
         int coeffEndsAt = 0;
         int termLength = term.length();
@@ -47,6 +52,7 @@ public class Term {
         this.variable = termString;
     }
     
+    @Override
     public String toString(){
         return coeff.toString() + variable;
     }
