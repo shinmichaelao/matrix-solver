@@ -1,6 +1,8 @@
 Solves matrixes of linear equations using gaussian elimination
 
-https://en.wikipedia.org/wiki/Gaussian_elimination
+http://www.purplemath.com/modules/cramers.htm <-- can be used for matrices with only 1 answer
+
+https://en.wikipedia.org/wiki/Gaussian_elimination <-- for everything else
 
 https://en.wikipedia.org/wiki/Pivot_element
 
