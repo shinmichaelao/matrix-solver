@@ -46,9 +46,20 @@ public class Row {
     }
     
     public Term getTerm(String s){
+        if(!this.parts.containsKey(s)){
+            this.parts.put(s, new Fraction(0,1));
+        }
         Fraction f = this.parts.get(s);
         return new Term(f,s);
     }
+    
+    public Fraction getValue(String s){
+        if(!this.parts.containsKey(s)){
+            this.parts.put(s, new Fraction(0,1));
+        }
+        return this.parts.get(s);
+    }
+    
     public void addTerm(Term newTerm){
                 
         String key = newTerm.variable;

@@ -48,7 +48,9 @@ public class Fraction {
         }
     }
     
-    
+    public double getValue(){
+        return (double)this.numerator/this.denominator;
+    }
     //reduce fraction to lowest terms
     public void reduce() {
         int gcd = getGCD( numerator, denominator );
