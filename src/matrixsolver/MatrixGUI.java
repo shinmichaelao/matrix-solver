@@ -4,15 +4,11 @@
  */
 package matrixsolver;
 
-/**
- *
- * @author xum3131
- */
+
 public class MatrixGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MatrixGUI
-     */
+    public static Matrix storedMatrix = null;
+    
     public MatrixGUI() {
         initComponents();
     }
@@ -26,21 +22,83 @@ public class MatrixGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        matrixDialog1 = new matrixsolver.MatrixDialog();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        enterMatrixButton = new javax.swing.JButton();
+        solveButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        enterMatrixButton.setText("Enter Matrix");
+        enterMatrixButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterMatrixButtonActionPerformed(evt);
+            }
+        });
+
+        solveButton.setText("Solve Matrix");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(enterMatrixButton)
+                .addGap(80, 80, 80)
+                .addComponent(solveButton)
+                .addContainerGap(292, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(345, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterMatrixButton)
+                    .addComponent(solveButton))
+                .addGap(204, 204, 204))
+        );
+
+        jTabbedPane3.addTab("Matrix Solver", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 795, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 572, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Chemical Equation Balancer", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void enterMatrixButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMatrixButtonActionPerformed
+        // TODO add your handling code here:
+       matrixDialog1.setVisible(true);
+       matrixDialog1.setBounds(200,200,230,210);
+       matrixDialog1.setLocationRelativeTo(null);
+       
+    }//GEN-LAST:event_enterMatrixButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +135,11 @@ public class MatrixGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton enterMatrixButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private matrixsolver.MatrixDialog matrixDialog1;
+    private javax.swing.JButton solveButton;
     // End of variables declaration//GEN-END:variables
 }
