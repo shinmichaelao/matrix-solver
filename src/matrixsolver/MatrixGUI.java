@@ -45,7 +45,6 @@ public class MatrixGUI extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         enterMatrixButton.setText("Enter Matrix");
         enterMatrixButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +60,8 @@ public class MatrixGUI extends javax.swing.JFrame {
             }
         });
 
+        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextPane1.setEnabled(false);
         jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
