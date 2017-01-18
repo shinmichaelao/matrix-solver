@@ -17,7 +17,6 @@ public class MatrixSolver {
     public static void main(String[] args) {
 
         MatrixGUI.main(args);
-        //ChemTerm keepo = new ChemTerm("Al2(SO4)3");
-        //System.out.println(keepo.parts);
+
     }
 }

@@ -34,6 +34,9 @@ public class MatrixGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
+        leftTextField = new javax.swing.JTextField();
+        rightTextField = new javax.swing.JTextField();
+        balanceButton = new javax.swing.JButton();
 
         matrixDialog1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -90,15 +93,42 @@ public class MatrixGUI extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Matrix Solver", jPanel1);
 
+        leftTextField.setText("CH3COOH + Al(OH)3");
+
+        rightTextField.setText("H2O + Al(CH3COO)3");
+
+        balanceButton.setText("Balance!");
+        balanceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                balanceButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(307, 307, 307)
+                .addComponent(balanceButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(leftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(132, 132, 132))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(leftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addComponent(balanceButton)
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Chemical Equation Balancer", jPanel2);
@@ -134,6 +164,10 @@ public class MatrixGUI extends javax.swing.JFrame {
         storedMatrix.solve();
         updatePane();
     }//GEN-LAST:event_solveButtonActionPerformed
+
+    private void balanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceButtonActionPerformed
+        ChemEquation equation = new ChemEquation( leftTextField.getText(), rightTextField.getText());
+    }//GEN-LAST:event_balanceButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -176,13 +210,16 @@ public class MatrixGUI extends javax.swing.JFrame {
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton balanceButton;
     private javax.swing.JButton enterMatrixButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextField leftTextField;
     private matrixsolver.MatrixDialog matrixDialog1;
+    private javax.swing.JTextField rightTextField;
     private javax.swing.JButton solveButton;
     // End of variables declaration//GEN-END:variables
 }

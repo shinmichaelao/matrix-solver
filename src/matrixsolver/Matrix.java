@@ -7,8 +7,8 @@ package matrixsolver;
 import java.util.*;
 
 public class Matrix {
-    List<Row> rows = new ArrayList();
-    List<String> keys = new ArrayList();
+    List<Row> rows = new ArrayList(); //the rows
+    List<String> keys = new ArrayList(); //the keys in each row
     
     public Matrix(List<Row> stuff){
         //List<String> keys = new ArrayList();
@@ -33,6 +33,9 @@ public class Matrix {
         
     }
     
+    public Matrix(ChemEquation ce){
+        
+    }
     public void swap(int i, int j){ //swap the position of row i and row j in matrix
         Collections.swap(this.rows, i, j);
     }

@@ -61,6 +61,8 @@ public class ChemTerm {
                 num = "1";
         }
         putElement(element, new Fraction(Integer.parseInt(num)));
+        
+        System.out.println(parts);
     }
     
     public void putElement(String element, Fraction coeff){
