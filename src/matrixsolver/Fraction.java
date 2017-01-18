@@ -125,7 +125,8 @@ public class Fraction {
     
     //Useful stuff for operations with fractions
     public static int getGCD(int a, int b) {
-        
+        a = Math.abs(a);
+        b = Math.abs(b);
         int max, min, rem;
         
         max = Math.max(a, b);

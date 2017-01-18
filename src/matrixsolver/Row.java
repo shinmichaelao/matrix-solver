@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class Row {
     Map<String, Fraction> parts = new HashMap<>();
+    Fraction constant = new Fraction(0,1);
     int fixing = 1;
     
 
@@ -29,7 +30,7 @@ public class Row {
                 curPart = "";
                 fixing = -1;
             }
-            else if(curChar == '+' || curChar == '-'){
+            else if(!curPart.equals("") && (curChar == '+' || curChar == '-')){
                 Term curTerm = new Term(curPart);
                 this.addTerm(curTerm);
                 
@@ -38,7 +39,6 @@ public class Row {
             else{
                 curPart += Character.toString(curChar);
             }
-            
         }
         this.addTerm(new Term(curPart));
 
@@ -97,6 +97,17 @@ public class Row {
     }
     
     public String toString(){
-        return this.parts.toString();
+        List<String> keys = new ArrayList<>(this.parts.keySet());
+        String stringMode = "=";
+        for(String key: keys){
+            if(key.equals("constant")){
+                stringMode = stringMode + this.parts.get(key);
+            }
+            else{
+                stringMode = this.parts.get(key) + key + " " + stringMode;
+            }
+        }
+        return stringMode;
+        //return this.parts.toString();
     }
 }

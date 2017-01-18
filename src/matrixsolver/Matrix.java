@@ -52,18 +52,25 @@ public class Matrix {
     public void subtract(int i, int j){ //subtract j from i
         Row rowi = this.rows.get(i);
         Row rowj = this.rows.get(j);
-        List<String> keys = new ArrayList<>(rowi.parts.keySet());
-        for(String key: keys){
-            rowj.addTerm(rowi.getTerm(key));
+        List<String> keyss = new ArrayList<>(rowj.parts.keySet());
+        for(String key: keyss){
+            Term curTerm = rowj.getTerm(key);
+            Term subTerm = new Term(curTerm.coeff, curTerm.variable);
+            if(subTerm.variable.equals("constant")){
+                subTerm.coeff.multiplyScalar(-1);
+            }
+            subTerm.coeff.multiplyScalar(-1);
+            rowi.addTerm(subTerm);
         }
     }
     
     public void solve(){
         int i = 0;
-        for(int keyNum = 0; keyNum < keys.size(); keyNum++/*int i = 0; i < this.rows.size() - 1; i++*/){
+        for(int keyNum = 1; keyNum < keys.size(); keyNum++/*int i = 0; i < this.rows.size() - 1; i++*/){
             
             //find pivot
             String curKey = keys.get(keyNum);
+            System.out.println("Elimination of: " + curKey);
             int c = i;
             Row pivot = this.rows.get(i);
             Fraction pivotCoeff = pivot.getValue(curKey);
@@ -76,26 +83,40 @@ public class Matrix {
                pivot = this.rows.get(i);
                pivotCoeff = pivot.getValue(curKey);
             }
+            
+            System.out.println("Pivot is " + pivot);
+            
             if(c == rows.size()){
                 continue;
             }
             
             pivot.divideScalar(pivotCoeff);
             
+            System.out.println("Pivot changed to " + pivot);
             //Eliminate the variable
-            for(int j = i; j < this.rows.size(); j++){
+            
+            for(int j = i + 1; j < this.rows.size(); j++){
                 Row curRow = rows.get(j);
+                System.out.println("Removing " + curKey + " from row: " + (j+1) + " " + curRow);
                 Fraction curRowCoeff = curRow.getValue(curKey);
                 if(curRowCoeff.getValue() == 0){
                     continue;
                 }
                 
                 pivot.multiplyScalar(curRowCoeff);
+                System.out.println("Multiply pivot by: " + curRowCoeff);
+                System.out.println("Pivot row is now " + pivot);
                 //SUBTRACT THE TWO
+                this.subtract(j,i);
+                System.out.println("Row " + (j+1) + " is now " + curRow);
                 
+                pivot.divideScalar(curRowCoeff);
+                pivot.multiplyScalar(new Fraction(-1/1));
+                System.out.println("Restoring pivot: " + pivot);
             }
             
             i++;
+            System.out.println("");
         }
     }
     

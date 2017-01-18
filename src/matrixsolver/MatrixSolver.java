@@ -16,7 +16,21 @@ public class MatrixSolver {
      */
     public static void main(String[] args) {
 
+
         MatrixGUI.main(args);
+
+
+        Row kappa = new Row("2x + y - z = 8");
+        Row kappa2 = new Row("-3x -y +2z = -11");
+        Row kappa3 = new Row("-2x +y +2z = -3");
+        List<Row> keepo = new ArrayList<>();
+        keepo.add(kappa);
+        keepo.add(kappa2);
+        keepo.add(kappa3);
+        Matrix m = new Matrix(keepo);
+        System.out.println(m);
+        m.solve();
+        System.out.println(m);
 
     }
 }
