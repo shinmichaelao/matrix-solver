@@ -77,7 +77,7 @@ public class MatrixDialog extends JDialog{
                 rows.add(new Row(field.getText()));
             }
             MatrixGUI.storedMatrix = new Matrix(rows);
-            MatrixGUI.matrixInfo = MatrixGUI.storedMatrix.toString();
+            //MatrixGUI.matrixInfo = MatrixGUI.storedMatrix.toString();
             reset();
             this.setVisible(false);
         }catch (Exception d){

@@ -52,6 +52,11 @@ public class MatrixGUI extends javax.swing.JFrame {
         });
 
         solveButton.setText("Solve Matrix");
+        solveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                solveButtonActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(jTextPane1);
 
@@ -125,6 +130,11 @@ public class MatrixGUI extends javax.swing.JFrame {
         this.updatePane();
     }//GEN-LAST:event_matrixDialog1ComponentHidden
 
+    private void solveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveButtonActionPerformed
+        storedMatrix.solve();
+        updatePane();
+    }//GEN-LAST:event_solveButtonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -158,6 +168,7 @@ public class MatrixGUI extends javax.swing.JFrame {
     }
     
     public void updatePane(){
+        matrixInfo = storedMatrix.toString();
         jTextPane1.setText(storedMatrix.toString());
         StyledDocument doc = jTextPane1.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
