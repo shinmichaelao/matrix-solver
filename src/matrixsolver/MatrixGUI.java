@@ -151,7 +151,7 @@ public class MatrixGUI extends javax.swing.JFrame {
     private void enterMatrixButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMatrixButtonActionPerformed
         // TODO add your handling code here:
        matrixDialog1.setVisible(true);
-       matrixDialog1.setBounds(200,200,230,210);
+       matrixDialog1.setBounds(200,200,250,150);
        matrixDialog1.setLocationRelativeTo(null);
        
     }//GEN-LAST:event_enterMatrixButtonActionPerformed
