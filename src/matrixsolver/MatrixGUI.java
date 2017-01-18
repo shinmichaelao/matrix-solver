@@ -4,10 +4,14 @@
  */
 package matrixsolver;
 
+import javax.swing.text.*;
+
+
 
 public class MatrixGUI extends javax.swing.JFrame {
 
     public static Matrix storedMatrix = null;
+    public static String matrixInfo = "";
     
     public MatrixGUI() {
         initComponents();
@@ -27,7 +31,15 @@ public class MatrixGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         enterMatrixButton = new javax.swing.JButton();
         solveButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
+
+        matrixDialog1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                matrixDialog1ComponentHidden(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -41,21 +53,30 @@ public class MatrixGUI extends javax.swing.JFrame {
 
         solveButton.setText("Solve Matrix");
 
+        jScrollPane2.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(241, 241, 241)
-                .addComponent(enterMatrixButton)
-                .addGap(80, 80, 80)
-                .addComponent(solveButton)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(enterMatrixButton)
+                        .addGap(80, 80, 80)
+                        .addComponent(solveButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(345, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterMatrixButton)
                     .addComponent(solveButton))
@@ -100,9 +121,10 @@ public class MatrixGUI extends javax.swing.JFrame {
        
     }//GEN-LAST:event_enterMatrixButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void matrixDialog1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_matrixDialog1ComponentHidden
+        this.updatePane();
+    }//GEN-LAST:event_matrixDialog1ComponentHidden
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -134,11 +156,21 @@ public class MatrixGUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void updatePane(){
+        jTextPane1.setText(storedMatrix.toString());
+        StyledDocument doc = jTextPane1.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterMatrixButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTextPane jTextPane1;
     private matrixsolver.MatrixDialog matrixDialog1;
     private javax.swing.JButton solveButton;
     // End of variables declaration//GEN-END:variables
