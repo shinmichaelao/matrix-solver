@@ -66,7 +66,7 @@ public class Matrix {
     
     public void solve(){
         int i = 0;
-        for(int keyNum = 1; keyNum < keys.size(); keyNum++/*int i = 0; i < this.rows.size() - 1; i++*/){
+        for(int keyNum = 1; keyNum < keys.size(); keyNum++){
             
             //find pivot
             String curKey = keys.get(keyNum);
@@ -117,6 +117,36 @@ public class Matrix {
             
             i++;
             System.out.println("");
+        }
+        
+        i--;
+        for(int keyNum = keys.size()-1;keyNum > 0; keyNum--){
+            String curKey = keys.get(keyNum);
+            Row pivot = this.rows.get(i);
+            if(pivot.getValue(curKey).getValue() == 0){
+                continue;
+            }
+            
+            for(int j = i - 1; j >= 0; j--){
+                Row curRow = rows.get(j);
+                System.out.println("Removing " + curKey + " from row: " + (j+1) + " " + curRow);
+                Fraction curRowCoeff = curRow.getValue(curKey);
+                if(curRowCoeff.getValue() == 0){
+                    continue;
+                }
+                
+                pivot.multiplyScalar(curRowCoeff);
+                System.out.println("Multiply pivot by: " + curRowCoeff);
+                System.out.println("Pivot row is now " + pivot);
+                //SUBTRACT THE TWO
+                this.subtract(j,i);
+                System.out.println("Row " + (j+1) + " is now " + curRow);
+                
+                pivot.divideScalar(curRowCoeff);
+                pivot.multiplyScalar(new Fraction(-1/1));
+                System.out.println("Restoring pivot: " + pivot);
+            }
+            i--;
         }
     }
     

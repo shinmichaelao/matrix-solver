@@ -20,7 +20,7 @@ public class MatrixSolver {
         MatrixGUI.main(args);
         //2x + y - z = 8
         //-3x -y +2z = -11
-        //-2x +y +2z = -3
+        //-3x -y +2z = -3
 
 
     }
