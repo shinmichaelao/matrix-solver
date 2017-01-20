@@ -14,25 +14,25 @@ A: Linear matrix solving
 
 1. Create classes for matrices(DONE) and linear equations(DONE) 
 
-2. Add pivoting to sort matrix into row-echelon form
+2. Add pivoting to sort matrix into row-echelon form (DONE)
 
   a. Require addition of fraction class and corresponding operators to work with pivots that result in 1/3 and 5/7 (DONE)
 
-3. Perform gaussian elimination on matrix
+3. Perform gaussian elimination on matrix (DONE)
 
-4. Simplify to reduced row-echelon form
+4. Simplify to reduced row-echelon form (WORKING ON HOW TO RETURN SOLUTION WITH MULTIPLE ANSWERS)
 
 
 B: GUI
 
-1. GUI for adding equations and solving matrices
+1. GUI for adding equations and solving matrices (DONE)
   
-  a. parse through a linear equation in string form
+  a. parse through a linear equation in string form (DONE)
   
-  b. GUI elements
+  b. GUI elements (DONE)
   
-2. GUI for chemical equation solver
+2. GUI for chemical equation solver (DONE)
 
-  a. parse through chemical equation
+  a. parse through chemical equation (WORKING ON CONVERTING EQUATION TO MATRIX AND VICE-VERSA)
   
-  b. GUI elements
+  b. GUI elements 
