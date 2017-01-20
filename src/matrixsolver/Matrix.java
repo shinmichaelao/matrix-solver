@@ -66,12 +66,18 @@ public class Matrix {
     
     public void solve(){
         int i = 0;
-        for(int keyNum = 1; keyNum < keys.size(); keyNum++){
+        for(int keyNum = keys.size() - 1; keyNum > 0; keyNum--){
             
             //find pivot
             String curKey = keys.get(keyNum);
             System.out.println("Elimination of: " + curKey);
             int c = i;
+            for(int checkPivot = i; checkPivot < this.rows.size(); checkPivot ++){
+                Row r = this.rows.get(checkPivot);
+                if(r.getValue(curKey).getValue() == 1){
+                    this.swap(i, checkPivot);
+                }
+            }
             Row pivot = this.rows.get(i);
             Fraction pivotCoeff = pivot.getValue(curKey);
             while(pivotCoeff.getValue() == 0){
@@ -119,11 +125,16 @@ public class Matrix {
             System.out.println("");
         }
         
-        i--;
-        for(int keyNum = keys.size()-1;keyNum > 0; keyNum--){
+        System.out.println("Row-Echelon Form");
+        System.out.println(this.toString());
+        System.out.println("");
+        
+        i = this.rows.size()-1;
+        for(int keyNum = 1;keyNum < this.keys.size(); keyNum++){
             String curKey = keys.get(keyNum);
             Row pivot = this.rows.get(i);
             if(pivot.getValue(curKey).getValue() == 0){
+                i--;
                 continue;
             }
             
@@ -145,6 +156,7 @@ public class Matrix {
                 pivot.divideScalar(curRowCoeff);
                 pivot.multiplyScalar(new Fraction(-1/1));
                 System.out.println("Restoring pivot: " + pivot);
+                System.out.println("");    
             }
             i--;
         }
