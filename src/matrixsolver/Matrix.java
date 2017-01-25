@@ -122,6 +122,9 @@ public class Matrix {
             }
             
             i++;
+            if(i > rows.size()){
+                break;
+            }
             System.out.println("");
         }
         
@@ -135,6 +138,9 @@ public class Matrix {
             Row pivot = this.rows.get(i);
             if(pivot.getValue(curKey).getValue() == 0){
                 i--;
+                if(i< 0){
+                    break;
+                }
                 continue;
             }
             
@@ -158,7 +164,11 @@ public class Matrix {
                 System.out.println("Restoring pivot: " + pivot);
                 System.out.println("");    
             }
+            
             i--;
+            if(i < 0){
+                break;
+            }
         }
     }
     
