@@ -34,7 +34,9 @@ public class Matrix {
     }
     
     public Matrix(ChemEquation ce){
-        
+        List<String> leftCompounds = new ArrayList(ce.leftSide.keySet());
+        List<String> rightCompounds = new ArrayList(ce.rightSide.keySet());
+         
     }
     public void swap(int i, int j){ //swap the position of row i and row j in matrix
         Collections.swap(this.rows, i, j);

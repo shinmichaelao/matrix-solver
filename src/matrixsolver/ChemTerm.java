@@ -7,7 +7,7 @@ package matrixsolver;
 
 import java.util.*;
 public class ChemTerm {
-    Map<String, Fraction> parts = new HashMap();
+    Map<String, Fraction> parts = new HashMap(); //element and its coefficient
     
     public ChemTerm(String term){
         term = term.replaceAll("\\s+","");
@@ -62,7 +62,7 @@ public class ChemTerm {
         }
         putElement(element, new Fraction(Integer.parseInt(num)));
         
-        System.out.println(parts);
+        //System.out.println(parts);
     }
     
     public void putElement(String element, Fraction coeff){

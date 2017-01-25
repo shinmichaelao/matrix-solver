@@ -168,6 +168,17 @@ public class MatrixGUI extends javax.swing.JFrame {
 
     private void balanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceButtonActionPerformed
         ChemEquation equation = new ChemEquation( leftTextField.getText(), rightTextField.getText());
+        for(String c: equation.leftSide.keySet()){
+            System.out.print(c + " ");
+        }
+        for(String c: equation.rightSide.keySet()){
+            System.out.print(c + " ");
+        }
+
+        System.out.println("");
+        for(String c: equation.elements){
+            System.out.print(c + " ");
+        }
     }//GEN-LAST:event_balanceButtonActionPerformed
 
     public static void main(String args[]) {
