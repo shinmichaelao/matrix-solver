@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Row {
     Map<String, Fraction> parts = new HashMap<>();
-    Fraction constant = new Fraction(0,1);
+    //Fraction constant = new Fraction(0,1);
     int fixing = 1;
     
 
@@ -45,6 +45,9 @@ public class Row {
         fixing = 1;
     }
     
+    public Row(String element, ChemEquation ce){
+        //nothing
+    }
     public Term getTerm(String s){
         if(!this.parts.containsKey(s)){
             this.parts.put(s, new Fraction(0,1));

@@ -34,9 +34,11 @@ public class Matrix {
     }
     
     public Matrix(ChemEquation ce){
-        List<String> leftCompounds = new ArrayList(ce.leftSide.keySet());
-        List<String> rightCompounds = new ArrayList(ce.rightSide.keySet());
-         
+        for(String element: ce.elements){ //for each element, make a row for it
+            Row curRow = new Row(element, ce);
+            
+
+        }
     }
     public void swap(int i, int j){ //swap the position of row i and row j in matrix
         Collections.swap(this.rows, i, j);
@@ -130,6 +132,7 @@ public class Matrix {
             System.out.println("");
         }
         
+        System.out.println("");
         System.out.println("Row-Echelon Form");
         System.out.println(this.toString());
         System.out.println("");
@@ -145,6 +148,10 @@ public class Matrix {
                 }
                 continue;
             }
+            System.out.println("Pivot is " + pivot);
+            Fraction pivotCoeff = pivot.getValue(curKey);
+            pivot.divideScalar(pivotCoeff);
+            System.out.println("Pivot changed to " + pivot);
             
             for(int j = i - 1; j >= 0; j--){
                 Row curRow = rows.get(j);
@@ -167,6 +174,8 @@ public class Matrix {
                 System.out.println("");    
             }
             
+            pivot.multiplyScalar(pivotCoeff);
+            System.out.println("Restoring pivot: " + pivot);
             i--;
             if(i < 0){
                 break;
