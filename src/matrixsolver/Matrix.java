@@ -122,7 +122,7 @@ public class Matrix {
             }
             
             i++;
-            if(i > rows.size()){
+            if(i == rows.size()){
                 break;
             }
             System.out.println("");
