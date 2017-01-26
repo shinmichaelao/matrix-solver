@@ -142,12 +142,30 @@ public class Matrix {
             String curKey = keys.get(keyNum);
             Row pivot = this.rows.get(i);
             if(pivot.getValue(curKey).getValue() == 0){
-                i--;
-                if(i< 0){
-                    break;
+                int checkNext = keyNum + 1;
+                while(checkNext < this.keys.size() && pivot.getValue(curKey).getValue() == 0){
+                    curKey = keys.get(checkNext);
+                    checkNext++;
                 }
-                continue;
+                if(checkNext == keys.size()){ //All zero row
+                    i--;
+                    keyNum--;
+                    if(i < 0){
+                        break;
+                    }
+                    continue;
+                }
+                else{ //Found something that can be eliminated
+                    keyNum = checkNext;
+                }   
             }
+//            if(pivot.getValue(curKey).getValue() == 0){
+//                i--;
+//                if(i < 0){
+//                    break;
+//                }
+//                continue;
+//            }
             System.out.println("Pivot is " + pivot);
             Fraction pivotCoeff = pivot.getValue(curKey);
             pivot.divideScalar(pivotCoeff);
@@ -176,7 +194,7 @@ public class Matrix {
             
             pivot.multiplyScalar(pivotCoeff);
             System.out.println("Restoring pivot: " + pivot);
-            i--;
+            //i--;
             if(i < 0){
                 break;
             }
