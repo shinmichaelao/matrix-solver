@@ -37,9 +37,23 @@ public class Matrix {
         for(String element: ce.elements){ //for each element, make a row for it
             Row curRow = new Row(element, ce);
             
-
+            for(String key: curRow.parts.keySet()){
+                if(!this.keys.contains(key)){
+                    this.keys.add(key);
+                }
+            }
+            this.rows.add(curRow);
+        }
+        
+        for(Row r: this.rows){
+            for(String key: keys){
+                if(!r.parts.containsKey(key)){
+                    r.parts.put(key, new Fraction(0,1));
+                }
+            }
         }
     }
+    
     public void swap(int i, int j){ //swap the position of row i and row j in matrix
         Collections.swap(this.rows, i, j);
     }
@@ -159,13 +173,7 @@ public class Matrix {
                     keyNum = checkNext;
                 }   
             }
-//            if(pivot.getValue(curKey).getValue() == 0){
-//                i--;
-//                if(i < 0){
-//                    break;
-//                }
-//                continue;
-//            }
+
             System.out.println("Pivot is " + pivot);
             Fraction pivotCoeff = pivot.getValue(curKey);
             pivot.divideScalar(pivotCoeff);
@@ -194,7 +202,6 @@ public class Matrix {
             
             pivot.multiplyScalar(pivotCoeff);
             System.out.println("Restoring pivot: " + pivot);
-            //i--;
             if(i < 0){
                 break;
             }

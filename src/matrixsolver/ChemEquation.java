@@ -10,7 +10,7 @@ package matrixsolver;
  * @author Michael
  */
 import java.util.*;
-public class ChemEquation {
+public class ChemEquation{
     Map<String, ChemTerm> leftSide = new HashMap();
     Map<String, ChemTerm> rightSide = new HashMap();
     Set<String> elements = new HashSet();

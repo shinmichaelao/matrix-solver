@@ -12,6 +12,7 @@ public class MatrixGUI extends javax.swing.JFrame {
 
     public static Matrix storedMatrix = null;
     public static String matrixInfo = "";
+    public static String solveText = "";
     
     public MatrixGUI() {
         initComponents();
@@ -179,6 +180,10 @@ public class MatrixGUI extends javax.swing.JFrame {
         for(String c: equation.elements){
             System.out.print(c + " ");
         }
+        Matrix chemMatrix = new Matrix(equation);
+        chemMatrix.solve();
+        System.out.println("");
+        System.out.println(chemMatrix.toString());
     }//GEN-LAST:event_balanceButtonActionPerformed
 
     public static void main(String args[]) {
@@ -215,7 +220,7 @@ public class MatrixGUI extends javax.swing.JFrame {
     
     public void updatePane(){
         matrixInfo = storedMatrix.toString();
-        jTextPane1.setText(storedMatrix.toString());
+        jTextPane1.setText(matrixInfo);
         StyledDocument doc = jTextPane1.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);

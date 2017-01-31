@@ -46,7 +46,37 @@ public class Row {
     }
     
     public Row(String element, ChemEquation ce){
-        //nothing
+        parts.put("constant", new Fraction(0,1));
+        
+        for(String key: ce.leftSide.keySet()){ //for each chemical compound, find the number of each element in it
+            ChemTerm curTerm = ce.leftSide.get(key);
+            
+            Fraction fr;
+            if(curTerm.parts.containsKey(element)){
+                fr = curTerm.parts.get(element);
+                
+            }
+            else{
+                fr = new Fraction(0,1);
+            }
+            Term t = new Term(fr, key);
+            //System.out.println(t);
+            this.addTerm(t);
+        }
+
+        for(String key: ce.rightSide.keySet()){ //for each chemical compound, find the number of each element in it
+            ChemTerm curTerm = ce.rightSide.get(key);
+            Fraction fr;
+            if(curTerm.parts.containsKey(element)){
+                fr = curTerm.parts.get(element);
+                fr.multiplyScalar(-1);
+            }
+            else{
+                fr = new Fraction(0,1);
+            }
+            Term t = new Term(fr, key);
+            this.addTerm(t);
+        }
     }
     public Term getTerm(String s){
         if(!this.parts.containsKey(s)){
