@@ -5,6 +5,7 @@
 package matrixsolver;
 
 import javax.swing.text.*;
+import java.util.*;
 
 
 
@@ -32,12 +33,18 @@ public class MatrixGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         enterMatrixButton = new javax.swing.JButton();
         solveButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         leftTextField = new javax.swing.JTextField();
         rightTextField = new javax.swing.JTextField();
         balanceButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         matrixDialog1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -47,14 +54,15 @@ public class MatrixGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        enterMatrixButton.setText("Enter Matrix");
+        enterMatrixButton.setText("Enter System of Equations");
         enterMatrixButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterMatrixButtonActionPerformed(evt);
             }
         });
 
-        solveButton.setText("Solve Matrix");
+        solveButton.setText("Solve System");
+        solveButton.setEnabled(false);
         solveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solveButtonActionPerformed(evt);
@@ -65,6 +73,27 @@ public class MatrixGUI extends javax.swing.JFrame {
         jTextPane1.setEnabled(false);
         jScrollPane2.setViewportView(jTextPane1);
 
+        jScrollPane1.setViewportView(jScrollPane2);
+
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("Show Steps");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Hint: For best results, enter the same number of equations as variables you are solving for!");
+        jLabel1.setEnabled(false);
+
+        jCheckBox2.setSelected(true);
+        jCheckBox2.setText("Show Hint");
+        jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox2ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,31 +101,47 @@ public class MatrixGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(enterMatrixButton)
-                        .addGap(80, 80, 80)
-                        .addComponent(solveButton))
+                        .addGap(229, 229, 229)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(enterMatrixButton)
+                                .addGap(44, 44, 44)
+                                .addComponent(solveButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addGap(31, 31, 31)
+                                .addComponent(jCheckBox2))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                        .addGap(187, 187, 187)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterMatrixButton)
                     .addComponent(solveButton))
-                .addGap(204, 204, 204))
+                .addGap(88, 88, 88))
         );
 
-        jTabbedPane3.addTab("Matrix Solver", jPanel1);
+        jTabbedPane3.addTab("Solve System of Equations", jPanel1);
 
+        leftTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         leftTextField.setText("CH3COOH + Al(OH)3");
 
+        rightTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rightTextField.setText("H2O + Al(CH3COO)3");
 
         balanceButton.setText("Balance!");
@@ -106,34 +151,44 @@ public class MatrixGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Enter the left and right sides of a chemical equation without coefficients");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("------->");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(307, 307, 307)
-                .addComponent(balanceButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(leftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-                .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(leftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel3))
+                    .addComponent(balanceButton)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2)
+                .addGap(57, 57, 57)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(leftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71)
+                    .addComponent(leftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(51, 51, 51)
                 .addComponent(balanceButton)
-                .addContainerGap(353, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Chemical Equation Balancer", jPanel2);
+        jTabbedPane3.addTab("Balance Chemical Equation", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,31 +215,41 @@ public class MatrixGUI extends javax.swing.JFrame {
 
     private void matrixDialog1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_matrixDialog1ComponentHidden
         this.updatePane();
+        solveButton.setEnabled(true);
     }//GEN-LAST:event_matrixDialog1ComponentHidden
 
     private void solveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveButtonActionPerformed
-        storedMatrix.solve();
-        updatePane();
+        try{
+            solveText = storedMatrix.toString() + "\n";
+            storedMatrix.solve();
+            updatePane();
+        }catch(Exception anything){
+            
+        }
+        solveButton.setEnabled(false);
     }//GEN-LAST:event_solveButtonActionPerformed
 
     private void balanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceButtonActionPerformed
         ChemEquation equation = new ChemEquation( leftTextField.getText(), rightTextField.getText());
-        for(String c: equation.leftSide.keySet()){
-            System.out.print(c + " ");
-        }
-        for(String c: equation.rightSide.keySet()){
-            System.out.print(c + " ");
-        }
-
-        System.out.println("");
-        for(String c: equation.elements){
-            System.out.print(c + " ");
-        }
         Matrix chemMatrix = new Matrix(equation);
         chemMatrix.solve();
+//        String leftBalanced = "";
+        Map<String, Fraction> balancedCoeff = new HashMap();
+        for(Row r: chemMatrix.rows){
+            
+        }
+        
         System.out.println("");
         System.out.println(chemMatrix.toString());
     }//GEN-LAST:event_balanceButtonActionPerformed
+
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        this.updatePane();
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
+    private void jCheckBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox2ItemStateChanged
+        jLabel1.setVisible(jCheckBox2.isSelected());
+    }//GEN-LAST:event_jCheckBox2ItemStateChanged
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -219,8 +284,18 @@ public class MatrixGUI extends javax.swing.JFrame {
     }
     
     public void updatePane(){
-        matrixInfo = storedMatrix.toString();
-        jTextPane1.setText(matrixInfo);
+        try{
+            matrixInfo = storedMatrix.toString();
+        }catch(Exception e){
+            matrixInfo = "";
+        }
+        
+        if(jCheckBox1.isSelected()){
+            jTextPane1.setText(solveText + "\n"  +  matrixInfo);
+        }
+        else{
+            jTextPane1.setText(matrixInfo);
+        }
         StyledDocument doc = jTextPane1.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
@@ -229,8 +304,14 @@ public class MatrixGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton balanceButton;
     private javax.swing.JButton enterMatrixButton;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextPane jTextPane1;

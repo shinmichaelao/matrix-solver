@@ -12,13 +12,14 @@ import java.util.*;
  */
 public class Row {
     Map<String, Fraction> parts = new HashMap<>();
-    //Fraction constant = new Fraction(0,1);
     int fixing = 1;
     
-
+    //make a row in a matrix from a math equation in string form
     public Row(String equation){
+        //add a constant of 0
         parts.put("constant", new Fraction(0,1));
         
+        //add the rest of the variables and constants
         equation = equation.replaceAll("\\s+","");
         char[] kappa = equation.toCharArray();
         String curPart = "";
@@ -45,7 +46,9 @@ public class Row {
         fixing = 1;
     }
     
+    //make row in matrix by using the number of a specific element as the coefficient
     public Row(String element, ChemEquation ce){
+        //add constant of 0
         parts.put("constant", new Fraction(0,1));
         
         for(String key: ce.leftSide.keySet()){ //for each chemical compound, find the number of each element in it
@@ -78,6 +81,8 @@ public class Row {
             this.addTerm(t);
         }
     }
+    
+    //returns the entire term from the key
     public Term getTerm(String s){
         if(!this.parts.containsKey(s)){
             this.parts.put(s, new Fraction(0,1));
@@ -86,6 +91,7 @@ public class Row {
         return new Term(f,s);
     }
     
+    //returns specific value from the key
     public Fraction getValue(String s){
         if(!this.parts.containsKey(s)){
             this.parts.put(s, new Fraction(0,1));
@@ -93,8 +99,8 @@ public class Row {
         return this.parts.get(s);
     }
     
-    public void addTerm(Term newTerm){
-                
+    //adds terms to the row while combining terms with the same variable
+    public void addTerm(Term newTerm){      
         String key = newTerm.variable;
         Fraction value;
         if(key.equals("constant")){
@@ -115,6 +121,7 @@ public class Row {
         
     }
     
+    //multiplies the entire row by a scalar
     public void multiplyScalar(Fraction f){
         List<String> keys = new ArrayList<>(this.parts.keySet());
         for(String key: keys){
@@ -122,6 +129,7 @@ public class Row {
         }
     }
     
+    //divides entire row by a scalar
     public void divideScalar(Fraction f){
         List<String> keys = new ArrayList<>(this.parts.keySet());
         for(String key: keys){
@@ -129,6 +137,7 @@ public class Row {
         }
     }
     
+    //return actual string equivalent
     public String toString(){
         List<String> keys = new ArrayList<>(this.parts.keySet());
         String stringMode = "=";
@@ -141,6 +150,5 @@ public class Row {
             }
         }
         return stringMode;
-        //return this.parts.toString();
     }
 }

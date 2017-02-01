@@ -11,7 +11,7 @@ public class Matrix {
     List<String> keys = new ArrayList(); //the keys in each row
     
     public Matrix(List<Row> stuff){
-        //List<String> keys = new ArrayList();
+        //sets all the rows up
         for(Row r: stuff){
             List<String> curKeys = new ArrayList<>(r.parts.keySet());
             for(String key: curKeys){
@@ -22,6 +22,7 @@ public class Matrix {
             this.rows.add(r);
         }
         
+        //adds missing variables with "0" as the coefficent
         for(Row r: this.rows){
             for(String key: keys){
                 if(!r.parts.containsKey(key)){
@@ -44,7 +45,7 @@ public class Matrix {
             }
             this.rows.add(curRow);
         }
-        
+        //put in variables with 0 coefficient if one of the compounds does have have the specific element in it
         for(Row r: this.rows){
             for(String key: keys){
                 if(!r.parts.containsKey(key)){
@@ -82,13 +83,14 @@ public class Matrix {
         }
     }
     
+    //gaussian elimination
     public void solve(){
         int i = 0;
         for(int keyNum = keys.size() - 1; keyNum > 0; keyNum--){
             
             //find pivot
             String curKey = keys.get(keyNum);
-            System.out.println("Elimination of: " + curKey);
+            MatrixGUI.solveText += "Elimination of: " + curKey + "\n";
             int c = i;
             for(int checkPivot = i; checkPivot < this.rows.size(); checkPivot ++){
                 Row r = this.rows.get(checkPivot);
@@ -107,8 +109,8 @@ public class Matrix {
                pivot = this.rows.get(i);
                pivotCoeff = pivot.getValue(curKey);
             }
-            
-            System.out.println("Pivot is " + pivot);
+
+            MatrixGUI.solveText += "Pivot is " + pivot + "\n";
             
             if(c == rows.size()){
                 continue;
@@ -116,41 +118,42 @@ public class Matrix {
             
             pivot.divideScalar(pivotCoeff);
             
-            System.out.println("Pivot changed to " + pivot);
-            //Eliminate the variable
+            MatrixGUI.solveText += "Pivot changed to " + pivot + "\n";
             
+            //Eliminate the variable
             for(int j = i + 1; j < this.rows.size(); j++){
                 Row curRow = rows.get(j);
-                System.out.println("Removing " + curKey + " from row: " + (j+1) + " " + curRow);
+                MatrixGUI.solveText += "Removing " + curKey + " from row " + (j+1) + ": " + curRow + "\n";
                 Fraction curRowCoeff = curRow.getValue(curKey);
                 if(curRowCoeff.getValue() == 0){
                     continue;
                 }
                 
                 pivot.multiplyScalar(curRowCoeff);
-                System.out.println("Multiply pivot by: " + curRowCoeff);
-                System.out.println("Pivot row is now " + pivot);
+                MatrixGUI.solveText += "Multiply pivot by: " + curRowCoeff + "\n";
+                MatrixGUI.solveText += "Pivot row is now " + pivot + "\n";
                 //SUBTRACT THE TWO
                 this.subtract(j,i);
-                System.out.println("Row " + (j+1) + " is now " + curRow);
+                MatrixGUI.solveText += "Row " + (j+1) + " is now " + curRow + "\n";
                 
                 pivot.divideScalar(curRowCoeff);
                 pivot.multiplyScalar(new Fraction(-1/1));
-                System.out.println("Restoring pivot: " + pivot);
+                MatrixGUI.solveText += "Restoring pivot: " + pivot + "\n";
             }
             
             i++;
             if(i == rows.size()){
                 break;
             }
-            System.out.println("");
+            MatrixGUI.solveText += "\n";
         }
         
-        System.out.println("");
-        System.out.println("Row-Echelon Form");
-        System.out.println(this.toString());
-        System.out.println("");
+        MatrixGUI.solveText += "\n";
+        MatrixGUI.solveText += "Row-Echelon Form \n";
+        MatrixGUI.solveText += this.toString() + "\n";
+        MatrixGUI.solveText += "\n";
         
+        //reverse elimination down to up to convert matrix into reduced row-echelon form
         i = this.rows.size()-1;
         for(int keyNum = 1;keyNum < this.keys.size(); keyNum++){
             String curKey = keys.get(keyNum);
@@ -170,38 +173,38 @@ public class Matrix {
                     continue;
                 }
                 else{ //Found something that can be eliminated
-                    keyNum = checkNext;
+                    keyNum = checkNext-1;
                 }   
             }
 
-            System.out.println("Pivot is " + pivot);
+            MatrixGUI.solveText += "Pivot is " + pivot + "\n";
             Fraction pivotCoeff = pivot.getValue(curKey);
             pivot.divideScalar(pivotCoeff);
-            System.out.println("Pivot changed to " + pivot);
+            MatrixGUI.solveText += "Pivot changed to " + pivot + "\n";
             
             for(int j = i - 1; j >= 0; j--){
                 Row curRow = rows.get(j);
-                System.out.println("Removing " + curKey + " from row: " + (j+1) + " " + curRow);
+                MatrixGUI.solveText += "Removing " + curKey + " from row " + (j+1) + ": " + curRow + "\n";
                 Fraction curRowCoeff = curRow.getValue(curKey);
                 if(curRowCoeff.getValue() == 0){
                     continue;
                 }
                 
                 pivot.multiplyScalar(curRowCoeff);
-                System.out.println("Multiply pivot by: " + curRowCoeff);
-                System.out.println("Pivot row is now " + pivot);
+                MatrixGUI.solveText += "Multiply pivot by: " + curRowCoeff + "\n";
+                MatrixGUI.solveText += "Pivot row is now " + pivot + "\n";
                 //SUBTRACT THE TWO
                 this.subtract(j,i);
-                System.out.println("Row " + (j+1) + " is now " + curRow);
+                MatrixGUI.solveText += "Row " + (j+1) + " is now " + curRow +"\n";
                 
                 pivot.divideScalar(curRowCoeff);
                 pivot.multiplyScalar(new Fraction(-1/1));
-                System.out.println("Restoring pivot: " + pivot);
-                System.out.println("");    
+                MatrixGUI.solveText += "Restoring pivot: " + pivot + "\n";
+                MatrixGUI.solveText += "\n";
             }
             
             pivot.multiplyScalar(pivotCoeff);
-            System.out.println("Restoring pivot: " + pivot);
+            MatrixGUI.solveText += "Restoring pivot: " + pivot + "\n";
             if(i < 0){
                 break;
             }

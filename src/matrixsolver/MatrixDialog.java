@@ -14,6 +14,8 @@ import javax.swing.*;
  *
  * @author Michael
  */
+//dialog for entering in equations based off of Hovercraft Full of Eels' example on http://stackoverflow.com/questions/6988317/dynamically-add-components-to-a-jdialog
+
 public class MatrixDialog extends JDialog{
     private java.util.List<JTextField> fields = new ArrayList();
     private JButton addNewFieldBtn = new JButton("Add New Field");
@@ -22,6 +24,7 @@ public class MatrixDialog extends JDialog{
     private int gridY = 0;
 
     public MatrixDialog() {
+      //formatting magic
       GridBagConstraints gbc = createGBC(0, gridY);
       centerPanel.add(new JLabel("Input your equations: "), gbc);
       gridY++;
@@ -49,12 +52,12 @@ public class MatrixDialog extends JDialog{
       bottomPanel.add(Box.createVerticalStrut(5));
       bottomPanel.add(submitPanel);
 
-      int eb = 8;
       this.setLayout(new BorderLayout());
       this.add(centerPanel, BorderLayout.CENTER);
       this.add(bottomPanel, BorderLayout.SOUTH);
     }
-
+    
+    //makes a new textfield to add another equation
     private void addNewFieldAction(ActionEvent e) {
       GridBagConstraints gbc = createGBC(0, gridY);
       centerPanel.add(new JLabel("Input Equation:"), gbc);
@@ -70,13 +73,19 @@ public class MatrixDialog extends JDialog{
       }
     }
     
+    //turns the fields into a matrix and sends it to MatrixGUI class
     private void submitAction(ActionEvent e){
+        if(this.fields.isEmpty()){
+            this.setVisible(false);
+            return;
+        }
         java.util.List<Row> rows = new ArrayList<>();
         try{
             for(JTextField field: fields){
                 rows.add(new Row(field.getText()));
             }
             MatrixGUI.storedMatrix = new Matrix(rows);
+            MatrixGUI.solveText = "";
             reset();
             this.setVisible(false);
         }catch (Exception d){
@@ -84,6 +93,7 @@ public class MatrixDialog extends JDialog{
         }
     }
     
+    //Resets the dialog box for inputting new equations
     private void reset(){
         fields = new ArrayList();
         centerPanel.removeAll();
@@ -95,6 +105,7 @@ public class MatrixDialog extends JDialog{
         
     }
     
+    //some more formatting magic
     private GridBagConstraints createGBC(int x, int y) {
       GridBagConstraints gbc = new GridBagConstraints();
       gbc.gridx = x;

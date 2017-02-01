@@ -15,6 +15,7 @@ public class ChemEquation{
     Map<String, ChemTerm> rightSide = new HashMap();
     Set<String> elements = new HashSet();
     
+    //takes left side and right side and parses through the strings into a workable form
     public ChemEquation(String ls, String rs){
         ls = ls.replaceAll("\\s+","");
         rs = rs.replaceAll("\\s+","");
@@ -23,7 +24,6 @@ public class ChemEquation{
         String curCompound = "";
         for(char c: leftChar){
             if(c == '+'){
-                //System.out.println(curCompound); //
                 leftSide.put(curCompound, new ChemTerm(curCompound));
                 elements.addAll(leftSide.get(curCompound).parts.keySet());
                 curCompound = "";
@@ -32,7 +32,6 @@ public class ChemEquation{
                 curCompound = curCompound + Character.toString(c);
             }
         }
-        //System.out.println(curCompound); //
         leftSide.put(curCompound, new ChemTerm(curCompound));
         elements.addAll(leftSide.get(curCompound).parts.keySet());
         curCompound = "";
@@ -40,7 +39,6 @@ public class ChemEquation{
         char[] rightChar = rs.toCharArray();
         for(char c: rightChar){
             if(c == '+'){
-                //System.out.println(curCompound); //
                 rightSide.put(curCompound, new ChemTerm(curCompound));
                 elements.addAll(rightSide.get(curCompound).parts.keySet());
                 curCompound = "";
@@ -49,7 +47,6 @@ public class ChemEquation{
                 curCompound = curCompound + Character.toString(c);
             }
         }
-        //System.out.println(curCompound); //
         rightSide.put(curCompound, new ChemTerm(curCompound));
         elements.addAll(rightSide.get(curCompound).parts.keySet());
         curCompound = "";

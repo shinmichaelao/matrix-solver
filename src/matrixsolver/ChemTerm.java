@@ -9,6 +9,7 @@ import java.util.*;
 public class ChemTerm {
     Map<String, Fraction> parts = new HashMap(); //element and its coefficient
     
+    //constructor that parses through a string and seperates it into Coefficient-Element pairs, ie Ca(OH)2 --> (Ca,1), (O,2), (H,2)
     public ChemTerm(String term){
         term = term.replaceAll("\\s+","");
         String num = "";
@@ -62,9 +63,9 @@ public class ChemTerm {
         }
         putElement(element, new Fraction(Integer.parseInt(num)));
         
-        //System.out.println(parts);
     }
     
+    //collect like terms and put in new terms
     public void putElement(String element, Fraction coeff){
         if(parts.containsKey(element)){
             parts.put(element, Fraction.add( coeff, parts.get(element) ) );
