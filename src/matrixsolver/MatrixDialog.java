@@ -25,6 +25,7 @@ public class MatrixDialog extends JDialog{
 
     public MatrixDialog() {
       //formatting magic
+      this.setTitle("Equations");
       GridBagConstraints gbc = createGBC(0, gridY);
       centerPanel.add(new JLabel("Input your equations: "), gbc);
       gridY++;
@@ -86,6 +87,7 @@ public class MatrixDialog extends JDialog{
             }
             MatrixGUI.storedMatrix = new Matrix(rows);
             MatrixGUI.solveText = "";
+            MatrixGUI.solvable = true;
             reset();
             this.setVisible(false);
         }catch (Exception d){
@@ -94,7 +96,7 @@ public class MatrixDialog extends JDialog{
     }
     
     //Resets the dialog box for inputting new equations
-    private void reset(){
+    public void reset(){
         fields = new ArrayList();
         centerPanel.removeAll();
         gridY = 0;

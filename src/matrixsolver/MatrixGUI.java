@@ -14,8 +14,10 @@ public class MatrixGUI extends javax.swing.JFrame {
     public static Matrix storedMatrix = null;
     public static String matrixInfo = "";
     public static String solveText = "";
+    public static boolean solvable = false;
     
     public MatrixGUI() {
+        this.setTitle("CEASES");
         initComponents();
     }
 
@@ -116,7 +118,7 @@ public class MatrixGUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +171,7 @@ public class MatrixGUI extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addComponent(balanceButton)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(rightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
         );
@@ -194,7 +196,7 @@ public class MatrixGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+            .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +217,8 @@ public class MatrixGUI extends javax.swing.JFrame {
 
     private void matrixDialog1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_matrixDialog1ComponentHidden
         this.updatePane();
-        solveButton.setEnabled(true);
+        matrixDialog1.reset();
+        solveButton.setEnabled(solvable);
     }//GEN-LAST:event_matrixDialog1ComponentHidden
 
     private void solveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveButtonActionPerformed
@@ -226,21 +229,70 @@ public class MatrixGUI extends javax.swing.JFrame {
         }catch(Exception anything){
             
         }
-        solveButton.setEnabled(false);
+        solvable = false;
+        solveButton.setEnabled(solvable);
     }//GEN-LAST:event_solveButtonActionPerformed
 
     private void balanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceButtonActionPerformed
         ChemEquation equation = new ChemEquation( leftTextField.getText(), rightTextField.getText());
         Matrix chemMatrix = new Matrix(equation);
         chemMatrix.solve();
-//        String leftBalanced = "";
+
+        //get the raw coefficients of each compound after solving <-- can have fractions
+        chemMatrix.keys.remove("constant"); //don't care about the constant because its always 0 anyway
+        String eliminatedKey = chemMatrix.keys.get(0);
         Map<String, Fraction> balancedCoeff = new HashMap();
-        for(Row r: chemMatrix.rows){
-            
+        balancedCoeff.put(eliminatedKey, new Fraction(1,1)); //set the eliminated variable as 1
+        for(int i = chemMatrix.rows.size() - 1; i >= 0; i--){
+            int keyNum = 1;
+            Row curRow = chemMatrix.rows.get(i);
+            String curKey = chemMatrix.keys.get(keyNum);
+            while((curKey.equals("constant") || curRow.parts.get(curKey).getValue() == 0) && keyNum != chemMatrix.keys.size()-1){
+                keyNum ++;
+                curKey = chemMatrix.keys.get(keyNum);
+            }
+            if(curRow.parts.get(curKey).getValue() != 0){
+                Fraction coeff = curRow.parts.get(eliminatedKey);
+                coeff.multiplyScalar(-1);
+                balancedCoeff.put(curKey, coeff);
+            }
         }
         
-        System.out.println("");
-        System.out.println(chemMatrix.toString());
+        //now remove the fractions by multiplying denominators
+        for(String key: balancedCoeff.keySet()){
+            int denom = balancedCoeff.get(key).denominator;
+            if(denom != 1){
+                for(String keyy: balancedCoeff.keySet()){
+                    Fraction f = balancedCoeff.get(keyy);
+                    f.multiplyScalar(denom);
+                    balancedCoeff.put(keyy, f);
+                }
+            }
+        }
+        System.out.println(balancedCoeff);
+        String leftSide = "";
+        for(String s: equation.leftSide.keySet()){
+            Fraction coeff = balancedCoeff.get(s);
+            if(coeff.getValue() != 1){
+                leftSide += coeff;
+            }
+            leftSide += s + " + ";
+        }
+        
+        String rightSide = "";
+        for(String s: equation.rightSide.keySet()){
+            Fraction coeff = balancedCoeff.get(s);
+            if(coeff.getValue() != 1){
+                rightSide += coeff;
+            }
+            rightSide += s + " + ";
+        }
+        
+        leftSide = leftSide.substring(0,leftSide.length()-2);
+        rightSide = rightSide.substring(0,rightSide.length()-2);
+        leftTextField.setText(leftSide);
+        rightTextField.setText(rightSide);
+        
     }//GEN-LAST:event_balanceButtonActionPerformed
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged

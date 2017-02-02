@@ -23,7 +23,10 @@ public class ChemEquation{
         char[] leftChar = ls.toCharArray();
         String curCompound = "";
         for(char c: leftChar){
-            if(c == '+'){
+            if(curCompound.equals("") && Character.isDigit(c)){
+                continue;
+            }
+            else if(c == '+'){
                 leftSide.put(curCompound, new ChemTerm(curCompound));
                 elements.addAll(leftSide.get(curCompound).parts.keySet());
                 curCompound = "";
@@ -38,7 +41,10 @@ public class ChemEquation{
         
         char[] rightChar = rs.toCharArray();
         for(char c: rightChar){
-            if(c == '+'){
+            if(curCompound.equals("") && Character.isDigit(c)){
+                continue;
+            }
+            else if(c == '+'){
                 rightSide.put(curCompound, new ChemTerm(curCompound));
                 elements.addAll(rightSide.get(curCompound).parts.keySet());
                 curCompound = "";
