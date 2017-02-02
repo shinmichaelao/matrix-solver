@@ -8,7 +8,7 @@ https://en.wikipedia.org/wiki/Pivot_element
 
 https://matrix.reshish.com/gaussSolution.php
 
-TODO List
+TODO List (DONE)
 
 A: Linear matrix solving
 
@@ -20,7 +20,7 @@ A: Linear matrix solving
 
 3. Perform gaussian elimination on matrix (DONE)
 
-4. Simplify to reduced row-echelon form (WORKING ON HOW TO RETURN SOLUTION WITH MULTIPLE ANSWERS)
+4. Simplify to reduced row-echelon form (DONE)
 
 
 B: GUI
@@ -33,6 +33,6 @@ B: GUI
   
 2. GUI for chemical equation solver (DONE)
 
-  a. parse through chemical equation (WORKING ON CONVERTING EQUATION TO MATRIX AND VICE-VERSA)
+  a. parse through chemical equation (DONE)
   
-  b. GUI elements 
+  b. GUI elements (DONE)
