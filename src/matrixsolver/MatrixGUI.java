@@ -208,7 +208,7 @@ public class MatrixGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enterMatrixButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterMatrixButtonActionPerformed
-        // TODO add your handling code here:
+        // opens up the equation entering dialog box
        matrixDialog1.setVisible(true);
        matrixDialog1.setBounds(200,200,250,150);
        matrixDialog1.setLocationRelativeTo(null);
@@ -216,12 +216,14 @@ public class MatrixGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_enterMatrixButtonActionPerformed
 
     private void matrixDialog1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_matrixDialog1ComponentHidden
+        //when the dialog box is closed, update the screen accordingly
         this.updatePane();
         matrixDialog1.reset();
         solveButton.setEnabled(solvable);
     }//GEN-LAST:event_matrixDialog1ComponentHidden
 
     private void solveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveButtonActionPerformed
+        //try and solve the system of equations
         try{
             solveText = storedMatrix.toString() + "\n";
             storedMatrix.solve();
@@ -234,6 +236,7 @@ public class MatrixGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_solveButtonActionPerformed
 
     private void balanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceButtonActionPerformed
+        //get input
         ChemEquation equation = new ChemEquation( leftTextField.getText(), rightTextField.getText());
         Matrix chemMatrix = new Matrix(equation);
         chemMatrix.solve();
@@ -269,7 +272,7 @@ public class MatrixGUI extends javax.swing.JFrame {
                 }
             }
         }
-        System.out.println(balancedCoeff);
+        
         String leftSide = "";
         for(String s: equation.leftSide.keySet()){
             Fraction coeff = balancedCoeff.get(s);
@@ -288,6 +291,7 @@ public class MatrixGUI extends javax.swing.JFrame {
             rightSide += s + " + ";
         }
         
+        //finally update the screen with the balanced chemical equation
         leftSide = leftSide.substring(0,leftSide.length()-2);
         rightSide = rightSide.substring(0,rightSide.length()-2);
         leftTextField.setText(leftSide);
@@ -335,6 +339,7 @@ public class MatrixGUI extends javax.swing.JFrame {
         });
     }
     
+    //update the scroll pane with new data
     public void updatePane(){
         try{
             matrixInfo = storedMatrix.toString();

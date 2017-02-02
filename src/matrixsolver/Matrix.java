@@ -204,11 +204,12 @@ public class Matrix {
             }
             
             pivot.multiplyScalar(pivotCoeff);
-            MatrixGUI.solveText += "Restoring pivot: " + pivot + "\n";
+            MatrixGUI.solveText += "Restoring pivot: " + pivot + "\n" + "\n";
             if(i < 0){
                 break;
             }
         }
+        MatrixGUI.solveText += "Solution is: \n";
     }
     
     @Override

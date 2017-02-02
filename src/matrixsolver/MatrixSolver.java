@@ -27,9 +27,7 @@ public class MatrixSolver {
         //2x+3y+z-1=0
         //x-y+z+2=0
         //2x-2y+2z+4=0 ...line
-        
-        //
-        //
+
 
     }
 }
